@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load staticfiles %}
+  <title>The Newsness: Welcome</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  {% if user.is_authenticated %}
+  <h1>Welcome {{ user.username }}</h1>
+  <h5>Your story can change the world!</h5>
+  <a href="/logout/">Logout</a><br />
+  <hr />
+  <br />
+  <ul>
+    <li><a href ="/new-story/">Start a new story</a></li>
+    <li><a href ="/your-submitted-articles/">Your submitted Articles</a></li>
+    <li><a href ="/your-published-articles/">Your Published articles</a></li>
+    <li><a href ="/research/">Research for your story</a></li>
+  </ul>
+  {% if submittedDrafts %}
+  <ul>
+  {% for drafts in submittedDrafts  %}
+    <li><a href ="/files"> {{ drafts.title }}</a></li>
+  {% endfor %}
+  </ul>
+  {% else %}
+  <p>No Articles Submitted.</p>
+  {% endif %}
+  {% else %}
+  Bad Request
+  {% endif %}
+</body>
+</html>

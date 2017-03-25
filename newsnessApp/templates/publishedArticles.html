@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                <meta charset="utf-8">
+                <title>theNewsness: Your published articles</title>
+        </head>
+
+        <body>
+            <h1 id = "heading">Welcome {{ user.username }}</h1>
+            <a href="/logout/">Logout</a><br />
+            <br />
+            <hr />
+                <!-- List of uploaded documents -->
+                {% if publishedArticles %}
+                        <ul>
+                        {% for articles in publishedArticles  %}
+                                <li><a href ="/files"> {{ articles.title }}</a></li>
+                        {% endfor %}
+                        </ul>
+                {% else %}
+                        <p>No Articles Published yet. Keep Writing...</p>
+                {% endif %}
+            <a href="/journalistshome/">Back home</a>
+        </body>
+</html>
