@@ -2,19 +2,52 @@
 <html>
 <head>
 	<title>View Articles</title>
+<style>
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #76448A;
+    color: white;
+}
+
+</style>
 </head>
 <body>
-<table>
-	<tr>
-	<th>Article title</th>  <th>Author</th>	<th>Scores 1 2 3 4</th>	<th>Status</th>	<th>Click to view!</th>
-	</tr>
-	<!--  iterate through the row below -->
-	<tr>
-		<td>abc</td>	<td>me</td>	<td>12312</td>	<td>submitted</td>	<td><input type="button" name="view" onclick="" value="view"></td>
-	</tr>
+<center>
+<table id="customers">
 
-
-
+  <tr>
+    <th>Article title</th>  
+	<th>Author</th>	
+	<th>Scores 1 2 3 4</th>	
+	<th>Status</th>	
+	<th>Click to view!</th>
+  </tr>
+  <tr>
+    <td>abc</td>	
+	<td>me</td>	
+	<td>12312</td>
+	<td>submitted</td>	
+	<td><input type="button" name="view" onclick="" value="view"></td>
+  </tr>
+  
 </table>
+</center>
 </body>
 </html>
