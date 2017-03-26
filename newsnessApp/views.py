@@ -8,7 +8,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from newsnessApp.models import publishedArticles, submittedDrafts
-import twittersentimentalanalysis, wikipediasummary
+import twittersentimentalanalysis, wikipediasummary, mysqlqueries
 # Create your views here.
 
 baseurl = "http://127.0.0.1:8000/"
@@ -46,10 +46,14 @@ def user_logout(request):
 def journalistslogin(request):
     return user_login(request,"/journalistshome/","index.html")
 
+def editorslogin(request):
+    return user_login(request,"/editorhome/","index.html")
+
 @login_required
 def journalistshome(request):
 
-    submitted_drafts = submittedDrafts.objects.filter(writer = request.user)
+    submitted_drafts = mysqlqueries.submittedarticlesofauthor(str(request.user))
+    print submitted_drafts
 
     return render_to_response(
         'journalisthome.html',
@@ -61,7 +65,7 @@ def journalistshome(request):
 def publishedarticlsfetcher(request):
 
     # Load documents for the list page
-    published_Articles = publishedArticles.objects.filter(writer = request.user)
+    published_Articles = mysqlqueries.publishedarticlesofauthor(str(request.user))
 
     return render_to_response(
         'publishedArticles.html',
@@ -73,18 +77,21 @@ def publishedarticlsfetcher(request):
 def submitteddraftsfetcher(request):
 
     # Load documents for the list page
-    submitted_drafts = submittedDrafts.objects.filter(writer = request.user)
+    submitted_drafts = mysqlqueries.submittedarticlesofauthor(str(request.user))
 
     return render_to_response(
-        'submittedDrafts.html',
+        'submittedDrafts1.html',
         {'submittedDrafts': submitted_drafts},
         context_instance=RequestContext(request)
     )
 
-@login_required
+def search(request):
+    return render(request, "search.html")
+
 def researchresults(request):
-    tanalysis = twittersentimentalanalysis.main()
-    wiki = wikipediasummary.getsummary("Narendra Modi")
+    tanalysis = twittersentimentalanalysis.main("narendra modi")
+    wiki = wikipediasummary.getsummary("narendra modi")
+    print wiki
     return render_to_response(
         'researchresults.html',
         {'positivesentimentpercentage': tanalysis[0],
@@ -92,4 +99,37 @@ def researchresults(request):
         'neutralsentimentpercentage' : 100-tanalysis[0]-tanalysis[1],
         'wiki':wiki},
         context_instance=RequestContext(request)
+        )
+
+@login_required
+def editorsdraftsfetcher(request):
+
+    # Load documents for the list page
+    submitted_drafts = mysqlqueries.allsubmittedarticles()
+
+    return render_to_response(
+        'editorhome.html',
+        {'submittedDrafts': submitted_drafts},
+        context_instance=RequestContext(request)
     )
+
+@login_required
+def writenewarticle(request):
+    return render(request, "home.html")
+
+
+@login_required
+def article_analysis(request):
+    if 'id' in request.GET:
+        id = request.GET['id']
+        import unicodedata
+        id = unicodedata.normalize('NFKD', id).encode('ascii','ignore')
+        message = 'You searched for: %d' %int(id)
+        print message
+
+        submitted_drafts = mysqlqueries.articlebyid(int(id))
+        return render_to_response(
+            'articleeditor.html',
+            {'article': submitted_drafts},
+            context_instance=RequestContext(request)
+        )
