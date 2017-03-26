@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Newsness: Your Submitted Articles</title>
+<style>
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+}
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #76448A;
+    color: white;
+}
+</style>
+</head>
+<body>
+  {% if submittedDrafts %}
+<center>
+<table id="customers">
+  <tr>
+    <th>Article title</th>
+	<th>Author</th>
+	<th>Description</th>
+	<th>sdate</th>
+	<th>Click to view!</th>
+  </tr>
+  {% for drafts in submittedDrafts  %}
+  <tr>
+    <td>{{ drafts.title }}</td>
+	<td>{{ drafts.author }}</td>
+	<td>{{ drafts.description }}</td>
+	<td>{{ drafts.sdate }}</td>
+	<td><input type="button" name="view" onclick="" value="view"></td>
+  </tr>
+  {% endfor %}
+
+</table>
+</center>
+{% else %}
+<p>No Articles Submitted.</p>
+{% endif %}
+<a href="/journalistshome/">Back home</a>
+</body>
+</html>

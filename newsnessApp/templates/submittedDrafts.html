@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                <meta charset="utf-8">
+                <title>theNewsness: Your Submitted Articles</title>
+        </head>
+
+        <body>
+            <h1 id = "heading">Welcome {{ user.username }}</h1>
+            <a href="/logout/">Logout</a><br />
+            <br />
+            <hr />
+                <!-- List of uploaded documents -->
+                {% if submittedDrafts %}
+                        <ul>
+                        {% for drafts in submittedDrafts  %}
+                                <li><a href ="/files"> {{ drafts.title }}</a></li>
+                        {% endfor %}
+                        </ul>
+                {% else %}
+                        <p>No Articles Submitted.</p>
+                {% endif %}
+            <a href="/journalistshome/">Back home</a>
+        </body>
+</html>
