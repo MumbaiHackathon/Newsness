@@ -11,4 +11,8 @@ You would need mysql and Django. Clone this project and run it as any django pro
 # About
 This project was part of mumbai hackathon and the idea was concieved and developed in 1 day only. The main logic was to implement The newsness quotient which tell us the relevance of news. It depends on multiple things, twitter analysis, mentions in our own database of published articles, mention in db of other news papers. Secondly, This project also aimed to help joirnalists to de research by providing them twitter sentimental analysis of a topic, wikipedia info and other relevant articles all in one page.
 
+# screenshots - 
+https://github.com/vaibhawvipul/Newsness/tree/master/screenshots
+
 # This project was part of mumbai hackathon 2017
+
