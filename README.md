@@ -3,3 +3,8 @@
  In it we are trying to automate journalism from the core.
  We are trying to make journalism unbiased and more factual , this is an attempt to make investigative journalism empowered.
  We are trying to make information free by creating quality content and making people aware of their freedom of speech and the importance of anonymity on internet.
+
+Installations - 
+
+You would need mysql and Django. Clone this project and run it as any django project. We are working to make installation process simple. 
+
